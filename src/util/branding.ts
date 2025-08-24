@@ -10,6 +10,9 @@ export function createBrandingFields(): Field[] {
           type: 'upload',
           relationTo: 'media',
           name: 'logo',
+          admin: {
+            description: 'Transparent logo',
+          },
         },
         {
           type: 'group',

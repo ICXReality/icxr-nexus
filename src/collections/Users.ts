@@ -13,6 +13,10 @@ export const Users: CollectionConfig = {
       type: 'text',
     },
     {
+      name: 'phoneNumber',
+      type: 'text',
+    },
+    {
       type: 'text',
       name: 'discordId',
       required: false,
@@ -27,6 +31,9 @@ export const Users: CollectionConfig = {
           defaultValue: false,
         },
       ],
+      access: {
+        update: ({ req: { user } }) => !!user?.admin?.isAdmin,
+      },
     },
   ],
 }

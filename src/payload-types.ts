@@ -86,7 +86,7 @@ export interface Config {
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
-    defaultIDType: number;
+    defaultIDType: string;
   };
   globals: {};
   globalsSelect: {};
@@ -122,8 +122,9 @@ export interface UserAuthOperations {
  * via the `definition` "users".
  */
 export interface User {
-  id: number;
+  id: string;
   name?: string | null;
+  phoneNumber?: string | null;
   discordId?: string | null;
   admin?: {
     isAdmin?: boolean | null;
@@ -151,7 +152,7 @@ export interface User {
  * via the `definition` "media".
  */
 export interface Media {
-  id: number;
+  id: string;
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -170,12 +171,12 @@ export interface Media {
  * via the `definition` "clubs".
  */
 export interface Club {
-  id: number;
+  id: string;
   name: string;
-  status?: ('draft' | 'pendingApproval' | 'inactive' | 'active') | null;
+  status?: ('inactive' | 'frozen' | 'pending' | 'active') | null;
   website?: string | null;
   email?: string | null;
-  university?: (number | null) | University;
+  university?: (string | null) | University;
   description?: string | null;
   links?:
     | {
@@ -184,7 +185,10 @@ export interface Club {
       }[]
     | null;
   branding?: {
-    logo?: (number | null) | Media;
+    /**
+     * Transparent logo
+     */
+    logo?: (string | null) | Media;
     colors?: {
       primary?: string | null;
       secondary?: string | null;
@@ -192,7 +196,7 @@ export interface Club {
   };
   officers?:
     | {
-        user?: (number | null) | User;
+        user?: (string | null) | User;
         title?: string | null;
         isRepresentative: boolean;
         id?: string | null;
@@ -206,7 +210,7 @@ export interface Club {
  * via the `definition` "universities".
  */
 export interface University {
-  id: number;
+  id: string;
   name: string;
   shortName?: string | null;
   website?: string | null;
@@ -216,7 +220,10 @@ export interface University {
    */
   location?: [number, number] | null;
   branding?: {
-    logo?: (number | null) | Media;
+    /**
+     * Transparent logo
+     */
+    logo?: (string | null) | Media;
     colors?: {
       primary?: string | null;
       secondary?: string | null;
@@ -230,28 +237,28 @@ export interface University {
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number;
+  id: string;
   document?:
     | ({
         relationTo: 'users';
-        value: number | User;
+        value: string | User;
       } | null)
     | ({
         relationTo: 'media';
-        value: number | Media;
+        value: string | Media;
       } | null)
     | ({
         relationTo: 'clubs';
-        value: number | Club;
+        value: string | Club;
       } | null)
     | ({
         relationTo: 'universities';
-        value: number | University;
+        value: string | University;
       } | null);
   globalSlug?: string | null;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   updatedAt: string;
   createdAt: string;
@@ -261,10 +268,10 @@ export interface PayloadLockedDocument {
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number;
+  id: string;
   user: {
     relationTo: 'users';
-    value: number | User;
+    value: string | User;
   };
   key?: string | null;
   value?:
@@ -284,7 +291,7 @@ export interface PayloadPreference {
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number;
+  id: string;
   name?: string | null;
   batch?: number | null;
   updatedAt: string;
@@ -296,6 +303,7 @@ export interface PayloadMigration {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  phoneNumber?: T;
   discordId?: T;
   admin?:
     | T

@@ -16,8 +16,8 @@ export const Clubs: CollectionConfig = {
     {
       name: 'status',
       type: 'select',
-      options: ['draft', 'pendingApproval', 'inactive', 'active'],
-      defaultValue: 'draft',
+      options: ['inactive', 'frozen', 'pending', 'active'],
+      defaultValue: 'inactive',
     },
     {
       name: 'website',
@@ -70,6 +70,7 @@ export const Clubs: CollectionConfig = {
       ],
     },
   ],
+  versions: true,
   admin: {
     useAsTitle: 'name',
     group: 'ICXR',

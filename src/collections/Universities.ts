@@ -26,6 +26,7 @@ export const Universities: CollectionConfig = {
     },
     ...createBrandingFields(),
   ],
+  versions: true,
   admin: {
     useAsTitle: 'name',
     group: 'ICXR',
