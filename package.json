@@ -1,4 +1,7 @@
 {
     "name": "icxr-nexus",
-    "private": true
+    "private": true,
+    "scripts": {
+        "dev": "pnpm -r run dev"
+    }
 }
