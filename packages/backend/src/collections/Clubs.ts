@@ -1,12 +1,13 @@
 import type { CollectionConfig } from 'payload'
-import { Users } from './Users'
 import { createBrandingFields } from '@/util/branding'
+import { ClubApplyEndpoint } from '@/endpoints/Clubs/apply'
 
 export const Clubs: CollectionConfig = {
   slug: 'clubs',
   access: {
     read: () => true,
   },
+  endpoints: [ClubApplyEndpoint],
   fields: [
     {
       name: 'name',
@@ -56,6 +57,28 @@ export const Clubs: CollectionConfig = {
           type: 'relationship',
           relationTo: 'users',
           name: 'user',
+        },
+        {
+          type: 'group',
+          name: 'inline',
+          fields: [
+            {
+              type: 'text',
+              name: 'name',
+            },
+            {
+              type: 'email',
+              name: 'email',
+            },
+            {
+              name: 'phone',
+              type: 'text',
+            },
+            {
+              name: 'discord',
+              type: 'text',
+            },
+          ],
         },
         {
           type: 'text',

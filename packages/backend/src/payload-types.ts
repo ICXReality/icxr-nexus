@@ -197,6 +197,12 @@ export interface Club {
   officers?:
     | {
         user?: (string | null) | User;
+        inline?: {
+          name?: string | null;
+          email?: string | null;
+          phone?: string | null;
+          discord?: string | null;
+        };
         title?: string | null;
         isRepresentative: boolean;
         id?: string | null;
@@ -377,6 +383,14 @@ export interface ClubsSelect<T extends boolean = true> {
     | T
     | {
         user?: T;
+        inline?:
+          | T
+          | {
+              name?: T;
+              email?: T;
+              phone?: T;
+              discord?: T;
+            };
         title?: T;
         isRepresentative?: T;
         id?: T;
