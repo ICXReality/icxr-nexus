@@ -8,7 +8,16 @@ export const Route = createFileRoute("/news/")({
 
 function RouteComponent() {
   return (
-    <Button onClick={async () => console.log(await trpc.hello.query())}>
+    <Button
+      onClick={async () =>
+        console.log(
+          await trpc.clubs.register.query({
+            name: "Test Club",
+            website: "https://test.com",
+          })
+        )
+      }
+    >
       Fetch
     </Button>
   );

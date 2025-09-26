@@ -1,13 +1,11 @@
 import type { CollectionConfig } from 'payload'
 import { createBrandingFields } from '@/util/branding'
-import { ClubApplyEndpoint } from '@/endpoints/Clubs/apply'
 
 export const Clubs: CollectionConfig = {
   slug: 'clubs',
   access: {
     read: () => true,
   },
-  endpoints: [ClubApplyEndpoint],
   fields: [
     {
       name: 'name',

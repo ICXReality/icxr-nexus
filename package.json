@@ -2,6 +2,6 @@
     "name": "icxr-nexus",
     "private": true,
     "scripts": {
-        "dev": "pnpm -r run dev"
+        "dev": "pnpm --parallel -r run dev"
     }
 }

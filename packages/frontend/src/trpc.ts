@@ -1,7 +1,7 @@
-import type { AppRouter } from "@icxr-nexus/business";
+import type { NexusAppRouter } from "@icxr-nexus/business";
 import { createTRPCProxyClient, httpBatchLink } from "@trpc/client";
 
-const trpc = createTRPCProxyClient<AppRouter>({
+const trpc = createTRPCProxyClient<NexusAppRouter>({
   links: [
     httpBatchLink({
       url: "http://localhost:3000/api/trpc",
