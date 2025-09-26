@@ -23,6 +23,8 @@
     "@payloadcms/payload-cloud": "3.48.0",
     "@payloadcms/richtext-lexical": "3.48.0",
     "@payloadcms/ui": "3.48.0",
+    "@icxr-nexus/business": "workspace:*",
+    "@trpc/next": "^11.5.1",
     "@trpc/server": "^11.5.1",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
