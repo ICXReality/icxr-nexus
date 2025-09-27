@@ -1,6 +1,7 @@
 import { z } from "zod";
+import { IdentifiableSchema } from "./Identifiable";
 
-export const ClubSchema = z.object({
+export const ClubDataSchema = z.object({
   name: z.string(),
   status: z
     .enum(["inactive", "frozen", "pending", "active"])
@@ -29,4 +30,6 @@ export const ClubSchema = z.object({
     .optional(),
 });
 
+export type ClubData = z.infer<typeof ClubDataSchema>;
+export const ClubSchema = IdentifiableSchema.extend(ClubDataSchema.shape);
 export type Club = z.infer<typeof ClubSchema>;

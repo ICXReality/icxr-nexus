@@ -11,10 +11,7 @@ function RouteComponent() {
     <Button
       onClick={async () =>
         console.log(
-          await trpc.clubs.register.query({
-            name: "Test Club",
-            website: "https://test.com",
-          })
+          await trpc.auth.
         )
       }
     >
