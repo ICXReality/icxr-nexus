@@ -1,6 +1,5 @@
 import NotFound from "@/components/ui/NotFound";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
-import Dashboard from "@/features/dashboard/Dashboard";
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -8,9 +7,5 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-  return (
-    <Dashboard>
-      <Outlet />
-    </Dashboard>
-  );
+  return <Outlet />;
 }

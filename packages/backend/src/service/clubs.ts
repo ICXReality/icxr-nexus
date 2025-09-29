@@ -1,7 +1,7 @@
 import { Club as PayloadClub } from '@/payload-types'
-import { Club as NexusClub } from '@icxr-nexus/business/dist/schema/Club'
+import { ClubData as NexusClub } from '@icxr-nexus/business/dist/schema/Club'
 import { NexusContext } from '@icxr-nexus/business/dist/types/context'
-import type { Payload } from 'payload'
+import { PayloadNexusRequestContext } from './nexus'
 
 function clubToPayload(
   nexusClub: NexusClub,
@@ -23,6 +23,7 @@ function clubToPayload(
 function payloadToClub(payloadClub: PayloadClub): NexusClub {
   // Map PayloadClub fields to NexusClub fields (map university to universityId)
   return {
+    id: payloadClub.id,
     name: payloadClub.name,
     status: payloadClub.status,
     website: payloadClub.website,
@@ -35,7 +36,7 @@ function payloadToClub(payloadClub: PayloadClub): NexusClub {
   } as NexusClub
 }
 
-export function createClubsContext(payload: Payload): NexusContext['clubs'] {
+export function createClubsContext({ payload }: PayloadNexusRequestContext): NexusContext['clubs'] {
   return {
     create: async (club) => {
       let payloadClub = await payload.create({

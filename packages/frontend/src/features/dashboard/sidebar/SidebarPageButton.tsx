@@ -15,7 +15,6 @@ const SidebarPageButton: React.FC<SidebarPageButtonProps> = memo(
       <>
         <IconButton
           variant={active ? "solid" : "ghost"}
-          color="white"
           aria-label={title}
           onClick={onClick}
         >

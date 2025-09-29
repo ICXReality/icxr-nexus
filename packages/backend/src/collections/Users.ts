@@ -22,6 +22,11 @@ export const Users: CollectionConfig = {
       required: false,
     },
     {
+      type: 'checkbox',
+      name: 'verified',
+      defaultValue: false,
+    },
+    {
       name: 'admin',
       type: 'group',
       fields: [

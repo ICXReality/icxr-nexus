@@ -1,48 +1,98 @@
-import { Checkbox } from "@/components/ui/checkbox";
-import { Field } from "@/components/ui/field";
+import { Alert } from "@/components/ui/alert";
 import ICXRLogo from "@/components/ui/ICXRLogo";
-import { Button, Card, Flex, Input, Separator, Stack } from "@chakra-ui/react";
-import React from "react";
+import { useTRPC } from "@/util/trpc";
+import { Button, Card, Flex, Separator, Stack } from "@chakra-ui/react";
+import { LogIn } from "@icxr-nexus/business/dist/schema/User";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
+import React, { useCallback } from "react";
 import { FaDiscord } from "react-icons/fa";
+import { useLoginForm } from "./forms/LoginForm";
+import { useLogIn } from "./hooks";
 
-type LoginProps = {};
+type LogInCardProps = {
+  disableDiscord?: boolean;
+};
 
-const Login: React.FC<LoginProps> = ({}) => {
+const LogInCard: React.FC<LogInCardProps> = ({ disableDiscord }) => {
+  const navigator = useNavigate();
+  const logIn = useLogIn();
+
+  const onSubmit = useCallback(
+    async (values: LogIn) => {
+      await new Promise((resolve) => {
+        logIn.mutate(values, {
+          onSuccess: () => {
+            navigator({ to: "/" });
+          },
+          onSettled: () => resolve(null),
+        });
+      });
+    },
+    [logIn]
+  );
+
+  const onSignUp = useCallback(() => {
+    navigator({ to: "/register" });
+  }, [navigator]);
+
+  const form = useLoginForm(onSubmit);
+
   return (
-    <Card.Root size="lg" width={"512px"}>
-      <Card.Header>
-        <Flex justifyContent="center" marginTop="4" marginBottom="4">
-          <ICXRLogo color={"black"} maxWidth="256px" />
-        </Flex>
-      </Card.Header>
-      <Card.Body>
-        <Stack gap="10">
-          <Stack>
-            <Button variant="outline">
-              <FaDiscord />
-              Sign in with Discord
-            </Button>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        form.handleSubmit();
+      }}
+    >
+      <Card.Root size="lg" width={"512px"}>
+        <Card.Header>
+          <Flex justifyContent="center" marginTop="4" marginBottom="4">
+            <ICXRLogo color={"fg"} maxWidth="256px" />
+          </Flex>
+        </Card.Header>
+        <Card.Body>
+          <Stack gap="10">
+            {logIn.isError && (
+              <Alert status="error" title="Login Failed">
+                {logIn.failureReason?.message}
+              </Alert>
+            )}
+            {!disableDiscord && (
+              <>
+                <Stack>
+                  <Button variant="outline">
+                    <FaDiscord />
+                    Sign in with Discord
+                  </Button>
+                </Stack>
+                <Separator />
+              </>
+            )}
+            <Stack gap="4">
+              <form.AppField name="email">
+                {(field) => <field.TextField label="Email" type="email" />}
+              </form.AppField>
+              <form.AppField name="password">
+                {(field) => (
+                  <field.TextField label="Password" type="password" />
+                )}
+              </form.AppField>
+            </Stack>
           </Stack>
-          <Separator />
-          <Stack gap="4">
-            <Field label="Email">
-              <Input type="email" />
-            </Field>
-            <Field label="Password">
-              <Input type="password" />
-            </Field>
-            <Flex justify={"space-between"}>
-              <Checkbox>Remember me</Checkbox>
-              <Button variant="ghost">Forgot your password?</Button>
-            </Flex>
-          </Stack>
-        </Stack>
-      </Card.Body>
-      <Card.Footer justifyContent={"end"}>
-        <Button>Log In</Button>
-      </Card.Footer>
-    </Card.Root>
+        </Card.Body>
+        <Card.Footer justifyContent={"end"}>
+          <Button variant={"ghost"} onClick={onSignUp}>
+            Sign up
+          </Button>
+          <form.AppForm>
+            <form.SubmitButton>Log In</form.SubmitButton>
+          </form.AppForm>
+        </Card.Footer>
+      </Card.Root>
+    </form>
   );
 };
 
-export default Login;
+export default LogInCard;

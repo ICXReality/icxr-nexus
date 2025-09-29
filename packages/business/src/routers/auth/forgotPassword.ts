@@ -1,5 +1,5 @@
 import { publicProcedure } from "../../trpc";
 
-export const registerNewUser = publicProcedure.mutation(
+export const forgotPassword = publicProcedure.mutation(
   async ({ ctx, input }) => {}
 );

@@ -4,6 +4,7 @@ import NexusColorPicker from "./NexusColorPicker";
 import NexusTextArea from "./NexusTextArea";
 import NexusTextField from "./NexusTextField";
 import NexusUploadField from "./NexusUploadField";
+import NexusSubmitButton from "./NexusSubmitButton";
 export const {
   fieldContext,
   formContext,
@@ -19,7 +20,9 @@ export const { useAppForm: useNexusForm } = createFormHook({
     UploadField: NexusUploadField,
     ColorPicker: NexusColorPicker,
   },
-  formComponents: {},
+  formComponents: {
+    SubmitButton: NexusSubmitButton,
+  },
   fieldContext,
   formContext,
 });

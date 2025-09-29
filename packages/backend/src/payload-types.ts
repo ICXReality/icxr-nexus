@@ -126,6 +126,7 @@ export interface User {
   name?: string | null;
   phoneNumber?: string | null;
   discordId?: string | null;
+  verified?: boolean | null;
   admin?: {
     isAdmin?: boolean | null;
   };
@@ -311,6 +312,7 @@ export interface UsersSelect<T extends boolean = true> {
   name?: T;
   phoneNumber?: T;
   discordId?: T;
+  verified?: T;
   admin?:
     | T
     | {

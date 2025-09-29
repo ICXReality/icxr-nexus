@@ -1,9 +1,8 @@
 import ICXRBackground from "@/components/ui/ICXRBackground";
-import Login from "@/features/auth/Login";
 import { Container, Flex } from "@chakra-ui/react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/login")({
+export const Route = createFileRoute("/_auth")({
   component: RouteComponent,
 });
 
@@ -16,7 +15,7 @@ function RouteComponent() {
           justifyContent={"center"}
           minHeight={"100vh"}
         >
-          <Login />
+          <Outlet />
         </Flex>
       </Container>
     </ICXRBackground>

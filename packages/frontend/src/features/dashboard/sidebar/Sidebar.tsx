@@ -5,6 +5,7 @@ import React, { memo, useState } from "react";
 import SidebarExpandButton from "./SidebarExpandButton";
 import SidebarPageButton from "./SidebarPageButton";
 import { SidebarPage } from "./types";
+import LogOutButton from "@/features/auth/LogOutButton";
 
 type SidebarProps = {
   pages: SidebarPage[];
@@ -65,6 +66,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ pages }) => {
           )}
         </For>
       </Stack>
+      <LogOutButton />
       <ICXRSquareLogo marginLeft="1" size="xl" color="white" />
     </Stack>
   );
