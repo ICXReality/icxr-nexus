@@ -19,6 +19,7 @@ const NexusTextArea: React.FC<NexusTextAreaProps> = ({
   return (
     <Field label={label} helperText={helperText} required={required}>
       <Textarea
+        variant={"subtle"}
         value={field.state.value}
         onBlur={field.handleBlur}
         onChange={(e) => field.handleChange(e.target.value)}

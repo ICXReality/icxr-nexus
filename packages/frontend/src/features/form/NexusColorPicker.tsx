@@ -22,6 +22,7 @@ const NexusColorPicker: React.FC<NexusColorPickerProps> = ({
         format="hsla"
         onValueChange={(e) => field.handleChange(e.value)}
         maxW="200px"
+        variant={"subtle"}
       >
         <ColorPicker.HiddenInput />
         <ColorPicker.Control>

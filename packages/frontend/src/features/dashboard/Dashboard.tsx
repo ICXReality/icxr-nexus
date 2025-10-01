@@ -1,26 +1,32 @@
-import { SIDEBAR_PAGES } from "@/app/constants";
-import Sidebar from "@/features/dashboard/sidebar/Sidebar";
-import DashboardPage from "@/layouts/DashboardPage";
-import { Box, HStack } from "@chakra-ui/react";
 import React from "react";
+import DashboardOverlay from "./DashboardOverlay";
+import { Box, Flex } from "@chakra-ui/react";
+import { useDots } from "../../util/dots";
 
 type DashboardProps = {
   children?: React.ReactNode;
 };
 
 const Dashboard: React.FC<DashboardProps> = ({ children }) => {
+  const dots = useDots();
   return (
-    <HStack
-      gap="0"
-      alignItems="flex-start"
-      justifyContent={"stretch"}
-      height="100vh"
-      maxHeight={"100vh"}
-    >
-      <Sidebar pages={SIDEBAR_PAGES} />
-      <DashboardPage title="Test">{children}</DashboardPage>
-    </HStack>
+    <>
+      <DashboardOverlay />
+      <Flex
+        paddingTop="96px"
+        paddingLeft={"96px"}
+        paddingRight={"96px"}
+        paddingBottom={"64px"}
+        minHeight={"100vh"}
+        justifyContent={"center"}
+        {...dots}
+      >
+        <Box maxWidth={"80em"} flex={1}>
+          {children}
+        </Box>
+      </Flex>
+    </>
   );
 };
 
-export default Dashboard;
+export default React.memo(Dashboard);

@@ -22,6 +22,7 @@ const ClubActivity: React.FC<ClubActivityProps> = ({
       onClick={onClick}
       bgColor={checked ? "colorPalette.600" : undefined}
       cursor="pointer"
+      transition={"background-color 0.15s"}
     >
       <Card.Header>
         <Flex justifyContent={"space-between"} alignItems={"flex-start"}>

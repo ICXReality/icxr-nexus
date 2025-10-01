@@ -1,21 +1,22 @@
-import { IconButton } from "@chakra-ui/react";
+import { Button, ButtonProps } from "@chakra-ui/react";
 import React, { useCallback } from "react";
 import { MdLogout } from "react-icons/md";
 import { useLogOut } from "./hooks";
 
-type LogOutButtonProps = {};
+type LogOutButtonProps = Omit<ButtonProps, "onClick">;
 
-const LogOutButton: React.FC<LogOutButtonProps> = ({}) => {
+const LogOutButton: React.FC<LogOutButtonProps> = (props) => {
   const logOut = useLogOut();
 
-  const onLogOut = useCallback(() => {
+  const onClick = useCallback(() => {
     logOut.mutate();
   }, [logOut]);
 
   return (
-    <IconButton variant={"ghost"} onClick={onLogOut}>
+    <Button {...props} onClick={onClick}>
       <MdLogout />
-    </IconButton>
+      Log out
+    </Button>
   );
 };
 

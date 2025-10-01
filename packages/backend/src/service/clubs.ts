@@ -1,10 +1,10 @@
 import { Club as PayloadClub } from '@/payload-types'
-import { ClubData as NexusClub } from '@icxr-nexus/business/dist/schema/Club'
+import { Club as NexusClub, ClubData as NexusClubData } from '@icxr-nexus/business/dist/schema/Club'
 import { NexusContext } from '@icxr-nexus/business/dist/types/context'
 import { PayloadNexusRequestContext } from './nexus'
 
 function clubToPayload(
-  nexusClub: NexusClub,
+  nexusClub: NexusClubData,
 ): Omit<PayloadClub, 'createdAt' | 'id' | 'sizes' | 'updatedAt'> {
   // Map NexusClub fields to PayloadClub fields (map universityId to university)
   return {
@@ -38,29 +38,39 @@ function payloadToClub(payloadClub: PayloadClub): NexusClub {
 
 export function createClubsContext({ payload }: PayloadNexusRequestContext): NexusContext['clubs'] {
   return {
-    create: async (club) => {
-      let payloadClub = await payload.create({
+    getClubs: async () => {
+      let payloadClubs = await payload.find({
         collection: 'clubs',
-        data: clubToPayload(club),
+        limit: 100, // Adjust limit as needed
       })
-      let nexusClub = payloadToClub(payloadClub)
-      return nexusClub
+      let nexusClubs = payloadClubs.docs.map(payloadToClub)
+      return nexusClubs
     },
-    find: async (id) => {
-      let payloadClub = await payload.findByID({
-        collection: 'clubs',
-        id: id,
-      })
-      if (!payloadClub) return null
-      let nexusClub = payloadToClub(payloadClub)
-      return nexusClub
-    },
-    update: (() => {}) as any,
-    delete: async (id) => {
-      await payload.delete({
-        collection: 'clubs',
-        id: id,
-      })
+    crud: {
+      create: async (club) => {
+        let payloadClub = await payload.create({
+          collection: 'clubs',
+          data: clubToPayload(club),
+        })
+        let nexusClub = payloadToClub(payloadClub)
+        return nexusClub
+      },
+      find: async (id) => {
+        let payloadClub = await payload.findByID({
+          collection: 'clubs',
+          id: id,
+        })
+        if (!payloadClub) return null
+        let nexusClub = payloadToClub(payloadClub)
+        return nexusClub
+      },
+      update: (() => {}) as any,
+      delete: async (id) => {
+        await payload.delete({
+          collection: 'clubs',
+          id: id,
+        })
+      },
     },
   }
 }

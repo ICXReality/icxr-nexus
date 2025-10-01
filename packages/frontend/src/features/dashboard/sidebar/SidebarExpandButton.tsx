@@ -1,4 +1,4 @@
-import { IconButton } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import React, { memo } from "react";
 import { MdMenu } from "react-icons/md";
 
@@ -10,13 +10,9 @@ type SidebarExpandButtonProps = {
 const SidebarExpandButton: React.FC<SidebarExpandButtonProps> = memo(
   ({ expanded, onClick }) => {
     return (
-      <IconButton
-        variant={expanded ? "solid" : "ghost"}
-        onClick={onClick}
-        color="white"
-      >
+      <Button onClick={onClick} variant={expanded ? "solid" : "ghost"}>
         <MdMenu />
-      </IconButton>
+      </Button>
     );
   }
 );

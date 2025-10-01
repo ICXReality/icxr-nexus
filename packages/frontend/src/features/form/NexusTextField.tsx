@@ -21,6 +21,7 @@ const NexusTextField: React.FC<NexusTextFieldProps> = ({
   return (
     <Field label={label} helperText={helperText} required={required}>
       <Input
+        variant={"subtle"}
         value={field.state.value}
         onChange={(e) => field.handleChange(e.target.value)}
         onBlur={field.handleBlur}

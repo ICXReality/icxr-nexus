@@ -1,15 +1,34 @@
 import { Button, Card } from "@chakra-ui/react";
 import React from "react";
 import { useRouter } from "@tanstack/react-router";
+import { IcxrGradient } from "@/util/gradient";
 
 type ClubApplicationCardProps = {};
 
 const ClubApplicationCard: React.FC<ClubApplicationCardProps> = ({}) => {
   const router = useRouter();
   return (
-    <Card.Root>
+    <Card.Root
+      borderColor="transparent"
+      overflow={"hidden"}
+      size="lg"
+      _before={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        content: '""',
+        borderRadius: "inherit",
+        border: "2px solid transparent",
+        background: IcxrGradient + " border-box",
+        mask: "linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0)",
+        maskComposite: "exclude",
+        pointerEvents: "none",
+      }}
+    >
       <Card.Header>
-        <Card.Title>Bring your XR Club to ICXR!</Card.Title>
+        <Card.Title fontSize={"4xl"}>Join us.</Card.Title>
       </Card.Header>
       <Card.Body>
         <Card.Description>

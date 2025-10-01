@@ -1,5 +1,5 @@
 import ICXRLogo from "@/components/ui/ICXRLogo";
-import { Button, Card, Flex, Stack } from "@chakra-ui/react";
+import { Card, Flex, Stack } from "@chakra-ui/react";
 import { RegisterNewUserData } from "@icxr-nexus/business/dist/schema/User";
 import { useNavigate } from "@tanstack/react-router";
 import React, { useCallback } from "react";

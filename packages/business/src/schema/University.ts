@@ -6,6 +6,7 @@ export const UniversityDataSchema = z.object({
   website: z.url().optional(),
   location: z.tuple([z.number(), z.number()]).optional(), //z.array(z.number()).length(2).optional(), // GeoJSON Point [longitude, latitude]
   timeZone: z.string().optional(),
+  logoUrl: z.url().optional(),
 });
 
 export type UniversityData = z.infer<typeof UniversityDataSchema>;

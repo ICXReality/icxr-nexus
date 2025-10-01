@@ -4,7 +4,7 @@ import { publicProcedure } from "../../trpc";
 export const register = publicProcedure
   .input(ClubDataSchema.omit({ status: true }))
   .mutation(async ({ ctx, input }) => {
-    await ctx.clubs.create({
+    await ctx.clubs.crud.create({
       ...input,
       status: "pending",
     });
