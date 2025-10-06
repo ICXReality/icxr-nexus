@@ -19,9 +19,10 @@ const Dashboard: React.FC<DashboardProps> = ({ children }) => {
         paddingBottom={"64px"}
         minHeight={"100vh"}
         justifyContent={"center"}
+        backgroundColor={"bg.muted"}
         {...dots}
       >
-        <Box maxWidth={"80em"} flex={1}>
+        <Box maxWidth={"80em"} flex={1} zIndex={1}>
           {children}
         </Box>
       </Flex>

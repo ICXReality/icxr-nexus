@@ -4,10 +4,11 @@ import { IcxrGradient } from "./gradient";
 export const dotRecipe = defineRecipe({
   base: {
     background: IcxrGradient,
-    mask: "radial-gradient(rgba(255,255,255,0.075) 1px, transparent 0)",
+    maskImage: "radial-gradient(rgba(255,255,255,0.15) 1px, transparent 0)",
     maskRepeat: "repeat",
     maskSize: "8px 8px",
     maskMode: "revert",
+    maskComposite: "intersect",
     content: '""',
     position: "absolute",
     top: 0,
@@ -15,6 +16,7 @@ export const dotRecipe = defineRecipe({
     right: 0,
     bottom: 0,
     pointerEvents: "none",
+    zIndex: 0,
   },
 });
 

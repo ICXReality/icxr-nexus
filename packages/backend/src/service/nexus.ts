@@ -2,6 +2,7 @@ import { NexusContext } from '@icxr-nexus/business/dist/types/context'
 import { createClubsContext } from './clubs'
 import { Payload } from 'payload'
 import { createUserContext } from './user'
+import { createFilesContext } from './files'
 
 export type PayloadNexusRequestContext = {
   payload: Payload
@@ -13,5 +14,6 @@ export function createPayloadNexus(ctx: PayloadNexusRequestContext): NexusContex
   return {
     user: createUserContext(ctx),
     clubs: createClubsContext(ctx),
+    files: createFilesContext(ctx),
   }
 }
