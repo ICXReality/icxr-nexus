@@ -1,14 +1,12 @@
 import { Alert } from "@/components/ui/alert";
 import ICXRLogo from "@/components/ui/ICXRLogo";
-import { useTRPC } from "@/util/trpc";
 import { Button, Card, Flex, Separator, Stack } from "@chakra-ui/react";
-import { LogIn } from "@icxr-nexus/business/dist/schema/User";
-import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import React, { useCallback } from "react";
 import { FaDiscord } from "react-icons/fa";
 import { useLoginForm } from "./forms/LoginForm";
 import { useLogIn } from "./hooks";
+import { LogInRequest } from "@icxr-nexus/business/dist/routers/auth/login";
 
 type LogInCardProps = {
   disableDiscord?: boolean;
@@ -19,7 +17,7 @@ const LogInCard: React.FC<LogInCardProps> = ({ disableDiscord }) => {
   const logIn = useLogIn();
 
   const onSubmit = useCallback(
-    async (values: LogIn) => {
+    async (values: LogInRequest) => {
       await new Promise((resolve) => {
         logIn.mutate(values, {
           onSuccess: () => {

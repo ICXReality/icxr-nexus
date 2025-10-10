@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     clubs: Club;
+    'club-applications': ClubApplication;
     universities: University;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +81,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     clubs: ClubsSelect<false> | ClubsSelect<true>;
+    'club-applications': ClubApplicationsSelect<false> | ClubApplicationsSelect<true>;
     universities: UniversitiesSelect<false> | UniversitiesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -242,6 +244,61 @@ export interface University {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "club-applications".
+ */
+export interface ClubApplication {
+  id: string;
+  applicant: string | User;
+  name: string;
+  email?: string | null;
+  website?: string | null;
+  description?: string | null;
+  university: {
+    name: string;
+    website?: string | null;
+  };
+  links?:
+    | {
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  tags?:
+    | {
+        tag: string;
+        id?: string | null;
+      }[]
+    | null;
+  officers?:
+    | {
+        user?: (string | null) | User;
+        inline?: {
+          name?: string | null;
+          email?: string | null;
+          phone?: string | null;
+          discord?: string | null;
+        };
+        title?: string | null;
+        isRepresentative: boolean;
+        id?: string | null;
+      }[]
+    | null;
+  branding?: {
+    /**
+     * Transparent logo
+     */
+    logo?: (string | null) | Media;
+    colors?: {
+      primary?: string | null;
+      secondary?: string | null;
+    };
+  };
+  memberSince?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -258,6 +315,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'clubs';
         value: string | Club;
+      } | null)
+    | ({
+        relationTo: 'club-applications';
+        value: string | ClubApplication;
       } | null)
     | ({
         relationTo: 'universities';
@@ -399,6 +460,65 @@ export interface ClubsSelect<T extends boolean = true> {
         isRepresentative?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "club-applications_select".
+ */
+export interface ClubApplicationsSelect<T extends boolean = true> {
+  applicant?: T;
+  name?: T;
+  email?: T;
+  website?: T;
+  description?: T;
+  university?:
+    | T
+    | {
+        name?: T;
+        website?: T;
+      };
+  links?:
+    | T
+    | {
+        url?: T;
+        id?: T;
+      };
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  officers?:
+    | T
+    | {
+        user?: T;
+        inline?:
+          | T
+          | {
+              name?: T;
+              email?: T;
+              phone?: T;
+              discord?: T;
+            };
+        title?: T;
+        isRepresentative?: T;
+        id?: T;
+      };
+  branding?:
+    | T
+    | {
+        logo?: T;
+        colors?:
+          | T
+          | {
+              primary?: T;
+              secondary?: T;
+            };
+      };
+  memberSince?: T;
   updatedAt?: T;
   createdAt?: T;
 }

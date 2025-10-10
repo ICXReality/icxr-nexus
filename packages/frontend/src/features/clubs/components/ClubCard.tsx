@@ -54,14 +54,14 @@ const ClubCard: React.FC<ClubCardProps> = ({ club }) => {
       </Card.Body>
       <Card.Footer>
         <HStack gap="8">
-          <For each={club.officers}>
+          {/* <For each={clubofficers}>
             {(officer) => (
               <Persona
                 name={officer.inline?.name ?? ""}
                 title={officer.title}
               />
             )}
-          </For>
+          </For> */}
         </HStack>
       </Card.Footer>
     </Card.Root>

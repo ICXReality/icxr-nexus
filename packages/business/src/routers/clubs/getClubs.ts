@@ -1,5 +1,4 @@
 import z from "zod";
-import { LogInSchema } from "../../schema/User";
 import { publicProcedure } from "../../trpc";
 import { ClubSchema } from "../../schema/Club";
 

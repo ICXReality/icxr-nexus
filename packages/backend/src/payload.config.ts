@@ -11,6 +11,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Clubs } from './collections/Clubs'
 import { Universities } from './collections/Universities'
+import { ClubApplications } from './collections/ClubApplications'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -23,7 +24,7 @@ export default buildConfig({
     },
   },
   cors: '*',
-  collections: [Users, Media, Clubs, Universities],
+  collections: [Users, Media, Clubs, ClubApplications, Universities],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

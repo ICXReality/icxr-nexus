@@ -1,8 +1,7 @@
 import { useNexusForm } from "@/features/form/NexusForm";
 import { NexusFile } from "@/features/form/NexusUploadField";
-import { useTRPC } from "@/util/trpc";
 import { parseColor } from "@chakra-ui/react";
-import { useMutation } from "@tanstack/react-query";
+import { useCreateClubApplicationMutation } from "../hooks";
 
 type Officer = {
   name: string;
@@ -12,11 +11,12 @@ type Officer = {
   isRep: boolean;
 };
 
-export function useClubApplicationForm() {
-  const tRPC = useTRPC();
-  const createClubApplication = useMutation(
-    tRPC.clubs.createClubApplication.mutationOptions()
-  );
+type UseApplicationFormOptions = {
+  onSuccess?: () => void;
+};
+
+export function useClubApplicationForm(options?: UseApplicationFormOptions) {
+  const createClubApplication = useCreateClubApplicationMutation();
 
   const form = useNexusForm({
     defaultValues: {
@@ -41,19 +41,20 @@ export function useClubApplicationForm() {
       const data = details.value;
       console.log("Form submitted with values:", details);
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
       await createClubApplication.mutateAsync({
         name: data.name,
         email: data.email,
-        website: data.website,
+        website: data.website.length > 0 ? data.website : undefined,
         description: data.description,
         links: data.links,
         tags: data.tags,
-        logo: data.logo[0].uploadKey ?? undefined,
+        logo: data.logo[0]?.uploadKey ?? undefined,
         university: {
           name: data.university.name,
-          website: data.university.website,
+          website:
+            data.university.website.length > 0
+              ? data.university.website
+              : undefined,
         },
         officers: data.officers.map((officer) => ({
           title: officer.title,
@@ -70,5 +71,8 @@ export function useClubApplicationForm() {
     },
   });
 
-  return form;
+  return {
+    form,
+    ...createClubApplication,
+  };
 }

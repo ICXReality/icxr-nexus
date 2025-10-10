@@ -1,9 +1,8 @@
-import { For, Stack, useRecipe } from "@chakra-ui/react";
+import { For, Stack } from "@chakra-ui/react";
 import { useRouter, useRouterState } from "@tanstack/react-router";
 import React, { memo } from "react";
 import ExpandableButton from "./ExpandableButton";
 import { SidebarPage } from "./types";
-import { dotRecipe, useDots } from "../../../util/dots";
 
 type SidebarProps = {
   sidebarExpanded?: boolean;

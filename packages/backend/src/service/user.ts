@@ -6,6 +6,7 @@ import { login } from '@payloadcms/next/auth'
 import { logout } from '@payloadcms/next/auth'
 import { headers as getHeaders } from 'next/headers'
 import config from '@payload-config'
+import { NexusUserContext } from '@icxr-nexus/business/dist/types/user'
 
 function payloadUserToNexusUser(payloadUser: PayloadUser): NexusUser {
   return {
@@ -15,6 +16,7 @@ function payloadUserToNexusUser(payloadUser: PayloadUser): NexusUser {
     discordId: payloadUser.discordId ?? undefined,
     phoneNumber: payloadUser.phoneNumber ?? undefined,
     verified: payloadUser.verified ?? false,
+    isAdmin: payloadUser.admin?.isAdmin ?? false,
   }
 }
 
@@ -22,7 +24,7 @@ export function createUserContext({
   req,
   payload,
   headers,
-}: PayloadNexusRequestContext): NexusContext['user'] {
+}: PayloadNexusRequestContext): NexusUserContext {
   return {
     logIn: async (logIn) => {
       await login({

@@ -76,11 +76,7 @@ const NexusUploadField: React.FC<NexusUploadFieldProps> = ({
         if (!response.ok) {
           throw new Error(`Upload failed: ${response.statusText}`);
         }
-
-        console.log("Upload successful");
       } catch (error) {
-        console.error("Upload error:", error);
-
         // Reset upload key on failure
         field.handleChange((prev) =>
           prev.map((f) => (f.file === file ? { uploadKey: null, file } : f))
@@ -89,8 +85,6 @@ const NexusUploadField: React.FC<NexusUploadFieldProps> = ({
     },
     []
   );
-
-  console.log(field.state.value);
 
   return (
     <Field label={label} helperText={helperText} required={required}>

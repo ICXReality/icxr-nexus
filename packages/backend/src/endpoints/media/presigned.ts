@@ -1,6 +1,5 @@
 import { Endpoint } from 'payload'
-import z, { file } from 'zod'
-import { FileUploadSchema, FileUploadResponseSchema } from '@icxr-nexus/business/dist/schema/File'
+import z from 'zod'
 
 // Validation schemas
 const UploadQuerySchema = z.object({

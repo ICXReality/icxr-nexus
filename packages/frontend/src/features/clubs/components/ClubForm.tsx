@@ -11,15 +11,20 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import React from "react";
-import { MdAdd, MdCancel, MdCheck, MdClose, MdWidgets } from "react-icons/md";
+import { MdAdd, MdCancel, MdClose, MdWidgets } from "react-icons/md";
 import { ClubActivities } from "../config/ClubTags";
 import { useClubApplicationForm } from "../data/ClubForm";
 import ClubActivity from "./ClubActivity";
+import { useNavigate } from "@tanstack/react-router";
+import { Alert } from "@/components/ui/alert";
 
 type ClubFormProps = {};
 
 const ClubForm: React.FC<ClubFormProps> = ({}) => {
-  const form = useClubApplicationForm();
+  const navigate = useNavigate();
+  const { form, isError, failureReason } = useClubApplicationForm({
+    onSuccess: () => navigate({ to: "/clubs" }),
+  });
   return (
     <form
       onSubmit={(e) => {
@@ -213,7 +218,11 @@ const ClubForm: React.FC<ClubFormProps> = ({}) => {
             )}
           </form.Field>
         </Fieldset>
-
+        {isError && (
+          <Alert status="error" title="Submission Failed">
+            {failureReason?.message}
+          </Alert>
+        )}
         <Flex justifyContent={"flex-end"} gap="4">
           <Button variant="outline">
             <MdCancel />

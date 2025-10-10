@@ -19,7 +19,7 @@ export const ClubOfficersSchema = z.array(
   })
 );
 
-export const ClubMetadataSchema = z.object({
+export const ClubIntrinsicDataSchema = z.object({
   name: z.string(),
   memberSince: z.date().optional(),
   website: z.string().optional(),
@@ -28,12 +28,6 @@ export const ClubMetadataSchema = z.object({
   links: z.array(z.string()).optional(),
   tags: z.array(z.string()).optional(),
   officers: ClubOfficersSchema.optional(),
-});
-
-export const ClubNexusMetadataSchema = z.object({
-  status: z
-    .enum(["inactive", "frozen", "pending", "active"])
-    .default("inactive"),
 });
 
 const ClubDataSchema = z.object({
@@ -48,7 +42,13 @@ const ClubDataSchema = z.object({
   links: z.array(z.string()).optional(),
 });
 
-export const ClubApplicationRequestSchema = ClubMetadataSchema.extend({
+export type ClubData = z.infer<typeof ClubDataSchema>;
+
+export const ClubSchema = IdentifiableSchema.extend(ClubDataSchema.shape);
+export type Club = z.infer<typeof ClubSchema>;
+
+export const ClubApplicationSchema = ClubIntrinsicDataSchema.extend({
+  applicantId: z.string(),
   university: z.object({
     name: z.string(),
     website: z.url().optional(),
@@ -56,6 +56,4 @@ export const ClubApplicationRequestSchema = ClubMetadataSchema.extend({
   logo: z.string().optional(),
 });
 
-export type ClubData = z.infer<typeof ClubDataSchema>;
-export const ClubSchema = IdentifiableSchema.extend(ClubDataSchema.shape);
-export type Club = z.infer<typeof ClubSchema>;
+export type ClubApplication = z.infer<typeof ClubApplicationSchema>;
