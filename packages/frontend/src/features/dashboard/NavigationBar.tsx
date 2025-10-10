@@ -1,10 +1,11 @@
 import ICXRSquareLogo from "@/components/ui/ICXRSquareLogo";
-import { Flex, HStack, Text } from "@chakra-ui/react";
+import { Button, Flex, HStack, IconButton, Text } from "@chakra-ui/react";
 import React from "react";
 import SidebarExpandButton from "./sidebar/SidebarExpandButton";
 import ProfileButton from "../auth/ProfileButton";
 import { useDots } from "../../util/dots";
 import NexusLogo from "@/components/ui/NexusLogo";
+import { useNavigate } from "@tanstack/react-router";
 
 type NavigationBarProps = {
   sidebarExpanded?: boolean;
@@ -15,6 +16,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
   sidebarExpanded,
   onSidebarExpandClick,
 }) => {
+  const navigate = useNavigate();
   return (
     <Flex
       minHeight="64px"
@@ -37,12 +39,18 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
         zIndex: 200,
       }}
     >
-      <HStack gap={"4"}>
+      <HStack gap={"2"}>
         <SidebarExpandButton
           expanded={sidebarExpanded}
           onClick={onSidebarExpandClick}
         />
-        <NexusLogo height={"24px"} />
+        <IconButton
+          onClick={() => navigate({ to: "/" })}
+          variant={"ghost"}
+          display={"flex"}
+        >
+          <NexusLogo height="24px" width="auto" margin="2" />
+        </IconButton>
       </HStack>
       <HStack>
         <ProfileButton />

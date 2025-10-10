@@ -14,7 +14,7 @@ type LogInCardProps = {
 };
 
 const LogInCard: React.FC<LogInCardProps> = ({ disableDiscord }) => {
-  const navigator = useNavigate();
+  const navigate = useNavigate();
   const logIn = useLogIn();
 
   const onSubmit = useCallback(
@@ -22,7 +22,7 @@ const LogInCard: React.FC<LogInCardProps> = ({ disableDiscord }) => {
       await new Promise((resolve) => {
         logIn.mutate(values, {
           onSuccess: () => {
-            navigator({ to: "/" });
+            navigate({ to: "/" });
           },
           onSettled: () => resolve(null),
         });
@@ -32,8 +32,8 @@ const LogInCard: React.FC<LogInCardProps> = ({ disableDiscord }) => {
   );
 
   const onSignUp = useCallback(() => {
-    navigator({ to: "/register" });
-  }, [navigator]);
+    navigate({ to: "/register" });
+  }, [navigate]);
 
   const form = useLoginForm(onSubmit);
 
