@@ -7,6 +7,7 @@ import { FaDiscord } from "react-icons/fa";
 import { useLoginForm } from "./forms/LoginForm";
 import { useLogIn } from "./hooks";
 import { LogInRequest } from "@icxr-nexus/business/dist/routers/auth/login";
+import NexusLogo from "@/components/ui/NexusLogo";
 
 type LogInCardProps = {
   disableDiscord?: boolean;
@@ -47,7 +48,7 @@ const LogInCard: React.FC<LogInCardProps> = ({ disableDiscord }) => {
       <Card.Root size="lg" width={"512px"}>
         <Card.Header>
           <Flex justifyContent="center" marginTop="4" marginBottom="4">
-            <ICXRLogo color={"fg"} maxWidth="256px" />
+            <NexusLogo color={"fg"} maxWidth="350px" />
           </Flex>
         </Card.Header>
         <Card.Body>

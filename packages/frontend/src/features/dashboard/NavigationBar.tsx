@@ -4,6 +4,7 @@ import React from "react";
 import SidebarExpandButton from "./sidebar/SidebarExpandButton";
 import ProfileButton from "../auth/ProfileButton";
 import { useDots } from "../../util/dots";
+import NexusLogo from "@/components/ui/NexusLogo";
 
 type NavigationBarProps = {
   sidebarExpanded?: boolean;
@@ -41,10 +42,7 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
           expanded={sidebarExpanded}
           onClick={onSidebarExpandClick}
         />
-        <HStack>
-          <ICXRSquareLogo size="xl" color="white" />
-          <Text>Nexus</Text>
-        </HStack>
+        <NexusLogo height={"24px"} />
       </HStack>
       <HStack>
         <ProfileButton />
